@@ -1,305 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="John Doe" />
-
-
-
-<meta name="description" content="首先我们先理清楚一个概念：编辑器和编译器和调试器！   ⭐️vim：是一款编辑器，只负责写代码；相当于 windows 的记事本； ⭐️gcc：是一款编译器，只负责程序的翻译； ⭐️gdb：是一款调试器，只负责程序的调试   而在我们在用 VS 写 C 代码的时候，这些是全都在 VS 编译器上实现的；因为 VS 是集成开发环境！  1. vim 的使用学习1.1 vim 简介： vim 是一个功">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo发博客">
-<meta property="og:url" content="http://example.com/2022/06/21/Hexo-2/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="首先我们先理清楚一个概念：编辑器和编译器和调试器！   ⭐️vim：是一款编辑器，只负责写代码；相当于 windows 的记事本； ⭐️gcc：是一款编译器，只负责程序的翻译； ⭐️gdb：是一款调试器，只负责程序的调试   而在我们在用 VS 写 C 代码的时候，这些是全都在 VS 编译器上实现的；因为 VS 是集成开发环境！  1. vim 的使用学习1.1 vim 简介： vim 是一个功">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/Hexo-2.assets/640-1655815680127.png">
-<meta property="og:image" content="http://example.com/Hexo-2.assets/640.gif">
-<meta property="og:image" content="http://example.com/Hexo-2.assets/640.png">
-<meta property="article:published_time" content="2022-06-21T13:23:40.000Z">
-<meta property="article:modified_time" content="2022-06-21T13:29:31.775Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/Hexo-2.assets/640-1655815680127.png">
-
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
-
-
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="使用Hexo发博客"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Hexo"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://example.com"/>
+  
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Hexo</title>
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
 
 
-
-    <link rel="shortcut icon" href="/favicon.png">
-
-
-
-    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>使用Hexo发博客 | Hexo</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: true,
-        isHome: false,
-        isPost: true,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: 
-    }
-</script>
-
-
-    <script> yiliaConfig.jquery_ui = [false]; </script>
-
-
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
-
-
-
-
+  <!-- Google Analytics -->
+  
 
 <meta name="generator" content="Hexo 6.2.0"></head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/"></a></h1>
-        </hgroup>
 
-        
-
-        
+  <body>
+    <!-- Page Header -->
 
 
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
-                        
-                        <li>Friends</li>
-                        
-                        
-                        <li>About Me</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
-                        
-                            <li><a href="/about/">关于我</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" href="#" title="GitHub"></a>
-                            
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
-                    
-                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">专注于前端</div>
-                </section>
-                
-            </div>
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">使用Hexo发博客</p>
+          <p class="subtitle"></p>
         </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
-            </hgroup>
+        <div class="site-menu with-background-image">
+          <ul>
             
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
-                
-                    <li><a href="/about/">关于我</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
-</nav>
-      <div class="body-wrap"><article id="post-Hexo-2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2022/06/21/Hexo-2/" class="article-date">
-      <time datetime="2022-06-21T13:23:40.000Z" itemprop="datePublished">2022-06-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      使用Hexo发博客
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-        <div class="clearfix"></div>
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
       </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
           
-        <blockquote>
+            <!-- Author -->
+            <span class="author info">By John Doe</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2022-06-21</span>
+            <span class="time">22:07:13</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <blockquote>
 <p>首先我们先理清楚一个概念：<strong>编辑器</strong>和<strong>编译器</strong>和<strong>调试器</strong>！</p>
 </blockquote>
 <ul>
@@ -577,10 +390,10 @@
 <p>例：我们经常要输入自己的邮箱，但是每次那么长太麻烦了；所以我们不妨定义一个快捷键来代替我们的邮箱；这就需要 ab 命令；</p>
 </blockquote>
 <ul>
-<li>:ab mymail <a href="mailto:&#x31;&#56;&#x37;&#x30;&#50;&#57;&#56;&#x34;&#x37;&#48;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#x31;&#56;&#x37;&#x30;&#50;&#57;&#56;&#x34;&#x37;&#48;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;</a></li>
+<li>:ab mymail <a href="mailto:&#x31;&#56;&#x37;&#x30;&#50;&#x39;&#56;&#x34;&#x37;&#x30;&#x40;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;">&#x31;&#56;&#x37;&#x30;&#50;&#x39;&#56;&#x34;&#x37;&#x30;&#x40;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;</a></li>
 </ul>
 <blockquote>
-<p>⭐️这样我们在输入邮箱直接输 mymail 回车，就可以替换成 <a href="mailto:&#49;&#56;&#55;&#48;&#x32;&#57;&#56;&#52;&#55;&#48;&#64;&#x71;&#x71;&#x2e;&#x63;&#111;&#109;">&#49;&#56;&#55;&#48;&#x32;&#57;&#56;&#52;&#55;&#48;&#64;&#x71;&#x71;&#x2e;&#x63;&#111;&#109;</a>，是不是很方便；</p>
+<p>⭐️这样我们在输入邮箱直接输 mymail 回车，就可以替换成 <a href="mailto:&#49;&#56;&#55;&#x30;&#x32;&#x39;&#56;&#x34;&#x37;&#48;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#x6d;">&#49;&#56;&#55;&#x30;&#x32;&#x39;&#56;&#x34;&#x37;&#48;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#x6d;</a>，是不是很方便；</p>
 </blockquote>
 <blockquote>
 <p><strong>注意：对于我们当前定义的快捷键都是临时生效的，要想永久生效需保存在：文件.vimrc中</strong></p>
@@ -621,208 +434,44 @@
 <p>自动配置推荐《传送门》(<a target="_blank" rel="noopener" href="https://github.com/askunix/VimForCpp">https://github.com/askunix/VimForCpp</a> 《传送门》)；在 GitHub 上，进入的时候可能会有卡顿，请耐心等待；配置好以后，在 vim 里面在写代码，别提多流畅啦！</p>
 </blockquote>
 
-      
+        </div>
+      </div>
     </div>
-    
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>Title:</span><a href="/2022/06/21/Hexo-2/">使用Hexo发博客</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage"></a></p>
-        <p><span>Created:</span>2022-06-21, 21:23:40</p>
-        <p><span>Updated:</span>2022-06-21, 21:29:31</p>
-        <p>
-            <span>Full URL:</span><a class="post-url" href="/2022/06/21/Hexo-2/" title="使用Hexo发博客">http://example.com/2022/06/21/Hexo-2/</a>
-            <span class="copy-path" data-clipboard-text="From http://example.com/2022/06/21/Hexo-2/　　By " title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2022/05/26/hello-world/">
-                    Hello World
-                </a>
-            </div>
-        
-    </nav>
-
-  
 </article>
 
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-vim-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">1. vim 的使用学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-vim-%E7%AE%80%E4%BB%8B%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 vim 简介：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 命令模式下的常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85-%E5%AE%9A%E4%BD%8D%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.1.</span> <span class="toc-text">🥅 定位命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85-%E5%88%A0%E9%99%A4%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.2.</span> <span class="toc-text">🥅 删除命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85%E5%A4%8D%E5%88%B6%E5%92%8C%E5%89%AA%E8%B4%B4"><span class="toc-number">1.2.3.</span> <span class="toc-text">🥅复制和剪贴</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85%E6%90%9C%E7%B4%A2%E5%92%8C%E6%90%9C%E7%B4%A2%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.4.</span> <span class="toc-text">🥅搜索和搜索替换命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85-%E4%BF%9D%E5%AD%98%E5%92%8C%E9%80%80%E5%87%BA%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.5.</span> <span class="toc-text">🥅 保存和退出命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-vim-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-number">2.</span> <span class="toc-text">2. vim 使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%AE%80%E5%8D%95%E6%8A%80%E5%B7%A7"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 简单技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85%E5%AF%BC%E5%85%A5%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%88%B0%E6%96%87%E4%BB%B6%E9%87%8C-r-%E5%91%BD%E4%BB%A4"><span class="toc-number">2.1.1.</span> <span class="toc-text">🥅导入命令执行结果到文件里 :r ! 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85%E8%BF%9E%E7%BB%AD%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="toc-number">2.1.2.</span> <span class="toc-text">🥅连续行注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%BF%AB%E6%8D%B7%E9%94%AE%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 快捷键的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85%E5%AE%9A%E4%B9%89%E5%BF%AB%E6%8D%B7%E9%94%AE-map-%E5%BF%AB%E6%8D%B7%E9%94%AE-%E8%A7%A6%E5%8F%91%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">🥅定义快捷键 :map 快捷键 触发命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A5%85%E6%9B%BF%E6%8D%A2%E5%BF%AB%E6%8D%B7%E9%94%AE-ab"><span class="toc-number">2.2.2.</span> <span class="toc-text">🥅替换快捷键:ab</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%AE%80%E5%8D%95-vim-%E9%85%8D%E7%BD%AE%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">3. 简单 vim 配置（重点）</span></a></li></ol>
-        
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
     </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
-
-    <script>
-        yiliaConfig.toc = ["Hide", "Show", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"使用Hexo发博客　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
-
-
-
-
-
-
-
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
-        
-
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2022/05/26/hello-world/" title="Next: Hello World">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/06/21/Hexo-2/">使用Hexo发博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/26/hello-world/">Hello World</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016-2022 John Doe
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>| </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
-    </div>
-</footer>
-    </div>
-    
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var iPad = window.navigator.userAgent.indexOf('iPad');
-            if (iPad > -1 || $(".left-col").css("display") === "none") {
-                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
-                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
-                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
-            }
-            else {
-                var backgroundnum = 5;
-                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
-            }
-        })
-    </script>
-
-
-
-
-
-<div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-            
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
-</script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
   </div>
-</body>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
 </html>
+
