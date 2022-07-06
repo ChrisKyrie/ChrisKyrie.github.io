@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Chris Kyrie">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Git常用命令"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="代码艺术"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://example.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="代码艺术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>代码艺术</title>
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/background.jpeg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Git常用命令</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Chris Kyrie</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2022-07-06</span>
+            <span class="time">17:48:08</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Git/">#Git</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Git是一种分布式版本管理工具，是开发中最常用的一种版本控制工具，本文将介绍常用的git命令。</p>
+<span id="more"></span>
+
+<h3 id="Git基本理论（重要）"><a href="#Git基本理论（重要）" class="headerlink" title="Git基本理论（重要）"></a>Git基本理论（重要）</h3><blockquote>
+<p>三个区域</p>
+</blockquote>
+<p>Git本地有三个工作区域：工作目录（Working Directory）、暂存区(Stage&#x2F;Index)、资源库(Repository或Git Directory)。如果在加上远程的git仓库(Remote Directory)就可以分为四个工作区域。文件在这四个区域之间的转换关系如下：</p>
+<p><img src="/2022/07/06/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1657100454968.png" alt="1657100454968"></p>
+<ul>
+<li>Workspace：工作区，就是你平时存放项目代码的地方</li>
+<li>Index &#x2F; Stage：暂存区，用于临时存放你的改动，事实上它只是一个文件，保存即将提交到文件列表信息</li>
+<li>Repository：仓库区（或本地仓库），就是安全存放数据的位置，这里面有你提交到所有版本的数据。其中HEAD指向最新放入仓库的版本</li>
+<li>Remote：远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</li>
+</ul>
+<p>本地的三个区域确切的说应该是git仓库中HEAD指向的版本：</p>
+<p><img src="/2022/07/06/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1657100480477.png" alt="1657100480477"></p>
+<ul>
+<li>Directory：使用Git管理的一个目录，也就是一个仓库，包含我们的工作空间和Git的管理空间。</li>
+<li>WorkSpace：需要通过Git进行版本控制的目录和文件，这些目录和文件组成了工作空间。</li>
+<li>.git：存放Git管理信息的目录，初始化仓库的时候自动创建。</li>
+<li>Index&#x2F;Stage：暂存区，或者叫待提交更新区，在提交进入repo之前，我们可以把所有的更新放在暂存区。</li>
+<li>Local Repo：本地仓库，一个存放在本地的版本库；HEAD会只是当前的开发分支（branch）。</li>
+<li>Stash：隐藏，是一个工作状态保存栈，用于保存&#x2F;恢复WorkSpace中的临时状态。</li>
+</ul>
+<blockquote>
+<p>工作流程</p>
+</blockquote>
+<p>git的工作流程一般是这样的：</p>
+<p>１、在工作目录中添加、修改文件；</p>
+<p>２、将需要进行版本管理的文件放入暂存区域；</p>
+<p>３、将暂存区域的文件提交到git仓库。</p>
+<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交(committed)</p>
+<p><img src="/2022/07/06/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1657100515797.png" alt="1657100515797"></p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git init [项目名]</td>
+<td>初始化一个新的本地代码库</td>
+</tr>
+<tr>
+<td>git config –global user.name “user.name”</td>
+<td>设置你的名字，将会被加到commit和tags中</td>
+</tr>
+<tr>
+<td>git config –global user.email “user.email”</td>
+<td>设置你的邮箱，将会被加到commit和tags中</td>
+</tr>
+</tbody></table>
+<h3 id="本地操作"><a href="#本地操作" class="headerlink" title="本地操作"></a>本地操作</h3><p><img src="/2022/07/06/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1657097309898.png" alt="1657097309898"></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git add [file]</td>
+<td>将文件保存到暂存区域</td>
+</tr>
+<tr>
+<td>git add .</td>
+<td>将所有文件保存到暂存区域</td>
+</tr>
+<tr>
+<td>git commit -m message</td>
+<td>将暂存区的代码保存到本地仓库</td>
+</tr>
+<tr>
+<td>git status</td>
+<td>查看当前状态，列出所有新修改、暂存区文件修改情况</td>
+</tr>
+<tr>
+<td>git log -n</td>
+<td>显示最近n次commit记录</td>
+</tr>
+<tr>
+<td>git reset –hard commit_id</td>
+<td>回滚版本</td>
+</tr>
+<tr>
+<td>git diff [file]</td>
+<td>查看工作区和暂存区的区别        <em><strong>如上图所示</strong></em></td>
+</tr>
+<tr>
+<td>git rm [file]</td>
+<td>删除工作和暂存区的文件</td>
+</tr>
+<tr>
+<td>git rm –cache [file]</td>
+<td>删除暂存区文件</td>
+</tr>
+<tr>
+<td>git reflog</td>
+<td>记录你所有的操作记录</td>
+</tr>
+<tr>
+<td>git checkout [file]</td>
+<td>将工作区修改撤销</td>
+</tr>
+<tr>
+<td>git reset HEAD [file]</td>
+<td>把暂存区修改撤销</td>
+</tr>
+<tr>
+<td>git stash</td>
+<td>将工作修改内容保存到贮藏区</td>
+</tr>
+<tr>
+<td>git stash pop</td>
+<td>将贮藏区内容恢复到工作区</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>列出代码库中所有的tag</td>
+</tr>
+<tr>
+<td>git tag -a &lt;版本号&gt; -m message</td>
+<td>新增一个版本号</td>
+</tr>
+</tbody></table>
+<h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git branch -a</td>
+<td>列出本地所有分支</td>
+</tr>
+<tr>
+<td>git switch -c [name]</td>
+<td>创建一个新的name分支</td>
+</tr>
+<tr>
+<td>git switch [name]</td>
+<td>切换分支</td>
+</tr>
+<tr>
+<td>git merge [name]</td>
+<td>将name分支与当前分支合并</td>
+</tr>
+<tr>
+<td>git branch -d [name]</td>
+<td>删除分支</td>
+</tr>
+</tbody></table>
+<p><img src="/2022/07/06/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1657098768820.png" alt="1657098768820"></p>
+<h3 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git clone [项目url]</td>
+<td>从远程代码库下载整个代码库和历史记录</td>
+</tr>
+<tr>
+<td>git remote add <remote name><url></url></remote></td>
+<td>链接一个远程库</td>
+</tr>
+<tr>
+<td>git fetch</td>
+<td>从远程代码库下载所有变动</td>
+</tr>
+<tr>
+<td>git pull</td>
+<td>从远程库拉取代码并将当前分支和他的upstream 合并</td>
+</tr>
+<tr>
+<td>git push [remote url] [branch]</td>
+<td>将当前代码库推送到远程remote库的branch分支</td>
+</tr>
+</tbody></table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
