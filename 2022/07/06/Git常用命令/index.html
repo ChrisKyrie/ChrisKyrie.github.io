@@ -104,7 +104,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2022-07-06</span>
-            <span class="time">17:48:08</span>
+            <span class="time">18:26:15</span>
           </span>
           
           <!--  Categories  -->
@@ -264,6 +264,10 @@
 <td>列出本地所有分支</td>
 </tr>
 <tr>
+<td>git branch -a -v</td>
+<td>列出所有分支的提交信息</td>
+</tr>
+<tr>
 <td>git switch -c [name]</td>
 <td>创建一个新的name分支</td>
 </tr>
@@ -297,6 +301,14 @@
 <td>链接一个远程库</td>
 </tr>
 <tr>
+<td>git remote -v</td>
+<td>查看远程仓库的信息</td>
+</tr>
+<tr>
+<td>git remote update origin</td>
+<td>拉取远程仓库的所有变动信息</td>
+</tr>
+<tr>
 <td>git fetch</td>
 <td>从远程代码库下载所有变动</td>
 </tr>
@@ -305,8 +317,16 @@
 <td>从远程库拉取代码并将当前分支和他的upstream 合并</td>
 </tr>
 <tr>
+<td>git pull origin dev:master</td>
+<td>将远程dev分支拉取到本地，并合并到本地master分支</td>
+</tr>
+<tr>
 <td>git push [remote url] [branch]</td>
 <td>将当前代码库推送到远程remote库的branch分支</td>
+</tr>
+<tr>
+<td>git push origin dev:master</td>
+<td>将本地dev分支推送到远程master分支</td>
 </tr>
 </tbody></table>
 
