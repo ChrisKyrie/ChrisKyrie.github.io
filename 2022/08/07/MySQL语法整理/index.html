@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Chris Kyrie">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="MySQL语法整理"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="代码艺术"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://example.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="代码艺术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>代码艺术</title>
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/background.jpeg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">MySQL语法整理</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Chris Kyrie</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2022-08-07</span>
+            <span class="time">14:01:30</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a> <a class="tag" href="/tags/MySQL/">#MySQL</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>本文整理了MySQL的常用语法，包括DML，DDL，DQL等基本语法。</p>
+<span id="more"></span>
+
+
+
+<h1 id="表基本操作"><a href="#表基本操作" class="headerlink" title="表基本操作"></a>表基本操作</h1><p><strong>查看表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TABLES [<span class="keyword">FROM</span> db_name] [<span class="keyword">LIKE</span> <span class="string">&#x27;pattern&#x27;</span><span class="operator">|</span>WHEAR expr];</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看列（表的组织结构）</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> COLUMNS <span class="keyword">FROM</span> tb_name;</span><br><span class="line"><span class="keyword">DESC</span> tb_name;</span><br></pre></td></tr></table></figure>
+
+<p>以上两条语句都可以。<br><strong>查看表的内容</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tb_name;</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入数据</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> [<span class="keyword">INTO</span>] tb_name [(col_name,...)] <span class="keyword">VALUES</span>(val,...);</span><br></pre></td></tr></table></figure>
+
+<p>如果不指明任何字段名，那么插入的数据必须要包含所有的字段。</p>
+<h1 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h1><p>共有三种Insert语句。<br><strong>INSERT</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> [<span class="keyword">INTO</span>] tb_name [(col_name,.....)] &#123;<span class="keyword">VALUE</span><span class="operator">|</span><span class="keyword">VALUES</span>&#125; (&#123;expr<span class="operator">|</span><span class="keyword">DEFAULT</span>&#125;,...) (...),...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>values是标准SQL关键字，value是MySQL自己的。    </li>
+<li>插入语句可以一次性插入多条记录。</li>
+<li>值可以是：<ul>
+<li>函数</li>
+<li>数学表达式</li>
+<li>等</li>
+</ul>
+</li>
+</ul>
+<p><em>默认值</em><br>在创建数据表的时候可以设置DEFAUTL。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> users(</span><br><span class="line">	id SAMLLINT UNSIGNED <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">	username SAMLLINT <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	password SAMLLINT <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	age TINYINT UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">10</span>,</span><br><span class="line">	sex <span class="type">BOOLEAN</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>INSERT的时候如果为自动编号的字段（比如上表中主键id）赋值的话，可写作NULL，或DEFAULT就会采用默认值。<br>如果字段设置了DEFAULT（比如上表中age），那么值直接写DEFAULT就行，注意此时，不能为NULL。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> users <span class="keyword">VALUES</span>(<span class="keyword">NULL</span>,<span class="string">&#x27;TOM&#x27;</span>,<span class="string">&#x27;123&#x27;</span>,<span class="keyword">DEFAULT</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>INSERT</strong>…<strong>SET</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> [<span class="keyword">INTO</span>] tb_name <span class="keyword">SET</span> col_name<span class="operator">=</span>&#123;expr<span class="operator">|</span><span class="keyword">DEFAULT</span>&#125;,...</span><br></pre></td></tr></table></figure>
+
+<p>采用了<a href="%E5%AD%90%E6%9F%A5%E8%AF%A2.md">子查询</a>。例如，上表中插入：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> users <span class="keyword">SET</span> username<span class="operator">=</span><span class="string">&#x27;Ben&#x27;</span>,password<span class="operator">=</span><span class="string">&#x27;456&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>因为id，和age都有默认值，所以可以不写。而sex允许为空，也可以不写。<br>##INSERT…SELECT*<br>将查找的结果写入记录中。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> test(username) <span class="keyword">SELECT</span> username <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> age <span class="operator">&gt;=</span><span class="number">30</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="查询语句"><a href="#查询语句" class="headerlink" title="查询语句"></a>查询语句</h1><p>查询就是SELECT语句</p>
+<p><strong>数学计算</strong><br>    SELECT 3*9</p>
+<p><strong>查询记录</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> select_expr [,select_expr ...]</span><br><span class="line">[</span><br><span class="line">	<span class="keyword">FROM</span> table_references</span><br><span class="line">    [<span class="keyword">WHERE</span> where_condition]</span><br><span class="line">    [<span class="keyword">GROUP</span> <span class="keyword">BY</span> &#123;col_name<span class="operator">|</span>position&#125; [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>],...]</span><br><span class="line">    [<span class="keyword">HAVING</span> where_condition]</span><br><span class="line">    [<span class="keyword">ORDER</span> <span class="keyword">BY</span> &#123;col_name<span class="operator">|</span>expr<span class="operator">|</span>position&#125; [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>],...]</span><br><span class="line">    [LIMIT &#123;[<span class="keyword">offset</span>,] row_count<span class="operator">|</span>row_count <span class="keyword">OFFSET</span> <span class="keyword">offset</span>&#125;]</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>别名</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id <span class="keyword">AS</span> userId，username <span class="keyword">AS</span> uname <span class="keyword">FROM</span> users;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>查询出来的列名，就变成了别名。AS其实可以省略，但可能会出现问题。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id username  <span class="keyword">FROM</span> users;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样会将username视作id的别名。</p>
+<p><strong>分组GROUPBY</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> &#123;col_name<span class="operator">|</span>position&#125; [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>],...]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ASC和DESC分别是升序（缺省）和降序。<br>看一个脚本：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br><span class="line"><span class="keyword">SELECT</span> sex <span class="keyword">FROM</span> users <span class="keyword">GROUP</span> <span class="keyword">BY</span> sex;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>也可以使用编号代替字段名，但是这样不鼓励。比如上面的分组语句可以写成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sex <span class="keyword">FROM</span> users <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>后面的数字1，值得是在SELECT选取的字段中的顺序。这里只选了一个字段，当然为1。</p>
+<p><strong>HAVING</strong><br>与GROUP BY分组联用。只对部分记录做分组操作。有两种用法，比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sex,age <span class="keyword">FROM</span> users <span class="keyword">GROUP</span> <span class="keyword">BY</span> sex <span class="keyword">HAVING</span> age <span class="operator">&gt;</span> <span class="number">35</span>;</span><br><span class="line"><span class="keyword">SELECT</span> sex <span class="keyword">FROM</span> users <span class="keyword">GROUP</span> <span class="keyword">BY</span> sex <span class="keyword">HAVING</span> <span class="built_in">count</span>(id) <span class="operator">&gt;=</span><span class="number">2</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一种，注意后面的HAVING的字段必须在前面SELECT部分出现才行。    </li>
+<li>第二种，在HAVING后面使用<em>聚合函数</em>，前面无需出现相应字段。</li>
+</ul>
+<p><em>Having放在group by后面</em></p>
+<p><strong>排序ORDER BY</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> &#123;col_name<span class="operator">|</span>expr<span class="operator">|</span>position&#125; [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>],...]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> id <span class="keyword">DESC</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以排序多个字段，如果第一个字段能排出结果，就不会用到第2个字段。比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> id ,id <span class="keyword">DESC</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>因为年龄age有相同的，继续排序就要用到id的降序。</p>
+<p><strong>限制返回记录的数量LIMIT</strong><br>LIMIT有两种语法结构，第一种比较常见。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[LIMIT &#123;[<span class="keyword">offset</span>,] row_count<span class="operator">|</span>row_count <span class="keyword">OFFSET</span> <span class="keyword">offset</span>&#125;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>起始位置，偏移量</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users ;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">3</span>,<span class="number">2</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">2</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3，2：表示从第3条开始返回，返回两条记录。注意记录从0开始编号，即结果集中的从第0条开始。<br>如果LIMIT后面只有一个参数，认作是偏移量，起始位置缺省为0。     </p>
+<p><strong>合并查询结果UNION</strong><br>在多条查询语句之间，使用<code>UNION</code>关键字会何必所有查询结果。<br>默认会去掉重复行，如果不想去掉重复行，请使用<code>UNION ALL</code><br>需要注意的是，要联合的查询结果必须有相同的列数（列名可以不同）</p>
+<p><em>去重效率比不去重效率低</em></p>
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><p>存储过程（Stored Procedure）是SQL语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理。<br>其效率比函数更高。增强SQL语句的功能和灵活性。减少网络流量。<br>客户端重启，存储过程不会失效。定界符只对客户端有效，客户端重启，定界符失效。</p>
+<blockquote>
+<p>数据库系统有三层结构：客户端、DBMS、服务端。我们的各种请求都是通过客户端发送给DBMS，DBMS将SQL语句编译成二进制,然后执行，接着缓存在DBMS中（再次执行时效率提高），接着发送给数据库服务端，然后服务端再返回数据给DBMS，DBMS再返回给客户端显示。<br>而存储过程，是将某些常用的请求，在DBMS中编译好二进制存储在DBMS中，以后再发送同样请求，就免去了编译的开销。</p>
+</blockquote>
+<p>模块化编程，可以提高速度。但是可移植性不好。</p>
+<p><strong>创建存储过程</strong><br>创建之前必须先选择（USE）数据库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE</span><br><span class="line">[DEFINER = &#123;user|CURRENT_USER&#125;]</span><br><span class="line">PROCEDURE  sp_name([proc_parameter[,...]])</span><br><span class="line">[characteristic ...] routine_body</span><br><span class="line"></span><br><span class="line">proc_parameter:</span><br><span class="line">[IN|OUT|INOUT] param_name type</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li>IN，表示该参数的值必须在调用存储过程时指定</li>
+<li>OUT，表示该参数的值可以被存储过程改变，并且可以被返回</li>
+<li>INOUT，表示该参数的调用时指定，并且可以被改变和返回</li>
+</ul>
+<p>可以这样理解，IN就是要传入的，值必须在调用时指定，不能返回（值传递），OUT是返回的（指针传递）。INOUT传入之后被返回的。</p>
+<p><strong>过程体</strong></p>
+<ul>
+<li>过程体由合法的SQL语句构成</li>
+<li>过程体是绝大部分SQL语句</li>
+<li>复合结构（超过两个SQL语句）使用BEGIN…END</li>
+<li>复合结构可以包含声明，循环，控制结构</li>
+</ul>
+<p><strong>调用存储过程</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CALL sp_name[()]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果存储过程没有参数，则调用的时候可以不加括号。</p>
+<p><strong>删除存储过程</strong><br>用DROP PROCDURE sp_name;</p>
+<hr>
+<p>我们应该已经发现了，所有CREATE 创建的东西，都需要用DROP来删除。包括：<br>数据库、表、视图、触发器、函数、存储过程<br>##举例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">delimiter // </span><br><span class="line">CREATE PROCEDURE </span><br><span class="line">  removeuserbyid(IN u_id INT UNSIGNED) </span><br><span class="line">begin </span><br><span class="line">  DELETE </span><br><span class="line">  FROM   users </span><br><span class="line">  WHERE  id = u_id;END//</span><br><span class="line">  -- 调用</span><br><span class="line">  CALL removeuserbyid(1)//</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>  注意参数的名字不能和字段名相同。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CREATE PROCEDURE </span><br><span class="line">  remove2(IN p_id      INT signed, </span><br><span class="line">          OUT usernums INT UNSIGNED) </span><br><span class="line">begin </span><br><span class="line">  DELETE </span><br><span class="line">  FROM   users </span><br><span class="line">  WHERE  id=p_id; </span><br><span class="line">   </span><br><span class="line">  SELECT count(id) </span><br><span class="line">  FROM   users </span><br><span class="line">  INTO   usernums; </span><br><span class="line"></span><br><span class="line">end//</span><br><span class="line">-- 调用</span><br><span class="line">CALL remove2(2,@nums)//</span><br><span class="line">-- 查看变量nums的值</span><br><span class="line">SELECT @nums//</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>返回值存储在变量@nums中。</p>
+<p><strong>修改存储过程</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ALTER PROCEDURE sp_name[characteristic ...]</span><br><span class="line">COMMENT &#x27;string&#x27;</span><br><span class="line">|&#123;COUNTAINS SQL|NO SQL|READS SQL DATA|MODIFIES SQL DATA&#125;</span><br><span class="line">|SQL SECURITY&#123;DEFINER|INVOKER&#125;|</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>与函数对比</strong><br>存储过程实现的功能更复杂一些；而函数的针对性更强。<br>时间经常用存储过程对表作操作。<br>存储过程可以用多个返回值。<br>存储过程独立出现。<br>函数出现在其他SQL语句内部。</p>
+<h1 id="连接（多表更新）"><a href="#连接（多表更新）" class="headerlink" title="连接（多表更新）"></a>连接（多表更新）</h1><p><strong>多表更新</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_references </span><br><span class="line">SET col_name1=&#123;expr1|DEFAULT&#125;</span><br><span class="line">[,col_name2=&#123;expr2|DEFAULT&#125;]...</span><br><span class="line">[WHERE where_condition]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>CREATE…SELECT</strong><br>创建数据表同时将查询结果写入到数据表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE [IF NOT EXISTS]tb_name</span><br><span class="line">[(create_definetion,...)]</span><br><span class="line">select_statement</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE tall (</span><br><span class="line">    tall_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">    num INT</span><br><span class="line">) SELECT 身高 AS num FROM</span><br><span class="line">    av</span><br><span class="line">GROUP BY 身高;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>创建新表tall，并从av表中选取身高字段插入到tall表的num字段。</p>
+<p><strong>连接</strong><br><strong>语法结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">table_reference</span><br><span class="line">&#123;[INNER|CROSS] JOIN|&#123;LELT|RIGHT&#125;[OUTER] JOIN&#125;</span><br><span class="line">table_reference</span><br><span class="line">ON conditional_expr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ON为条件。<br>三种连接，即：</p>
+<ul>
+<li>内连接</li>
+<li>左外连接</li>
+<li>右外连接</li>
+</ul>
+<p>####内连接<br>显示左表及右表符合连接条件的记录（交集）<br>####左外连接<br>显示左表的全部记录及右表符合连接条件的记录</p>
+<p><strong>右外连接</strong><br>类别左外连接</p>
+<p><strong>UPDATE..JOIN..SET</strong><br>比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UPDATE actor AS a</span><br><span class="line">        INNER JOIN</span><br><span class="line">    tall AS b ON a.tall = b.num </span><br><span class="line">SET </span><br><span class="line">    a.tall = b.tall_id;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>依据实际情况，选择是否使用别名。（如果两个表中进行比较的字段名相同，则需要别名）<br>该语句完成了一个替换，将actor表中具体的身高数值，替换为tall表中身高的对应id。</p>
+<p>更新记录分为：</p>
+<ul>
+<li>单表更新</li>
+<li>多表更新（要涉及连接）</li>
+</ul>
+<h1 id="更新记录（单表更新）"><a href="#更新记录（单表更新）" class="headerlink" title="更新记录（单表更新）"></a>更新记录（单表更新）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPDATE [LOW_PRIORITY] [IGNORE] tb_reference </span><br><span class="line">SET col_name1=&#123;expr|DEFAULT&#125; [,col_name2=&#123;expr|DEFAULT&#125;]...</span><br><span class="line">[WHERE where_condition]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>不写where会更新全部的记录。</p>
+<h1 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h1><p>同样分为：</p>
+<ul>
+<li>单表删除</li>
+<li>多表删除</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM tb_name [WHERE where_condition];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>没有where部分则会删除全部记录。</p>
+<h2 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MD5</td>
+<td>信息摘要算法</td>
+</tr>
+<tr>
+<td>PASSWORD</td>
+<td>密码算法</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p> 用于WEB页面用MD5算法保存用户密码<br> 用户本地用户，用PASSWORD修改密码。比如  </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE user SET Password=PASSWORD(&#x27;newpassword&#x27;) where USER=&#x27;root&#x27;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意user表在系统数据库mysql下。执行命令之前请<code>USE mysql</code>。</p>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AVG</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>COUNT</td>
+<td>计数</td>
+</tr>
+<tr>
+<td>MAX</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>SUM</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>###注意</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>聚合函数只有一个返回值！</li>
+<li>不能直接用SELECT 加函数名的形式来调用，必须针对字段！</li>
+<li>优先级<ul>
+<li>聚合函数优先级小于WHERE语句，不能用来WHERE后面。</li>
+<li>聚合函数优先级大于HAVING，可以用在HAVING后面。</li>
+</ul>
+</li>
+</ul>
+<p>##COUNT</p>
+<ul>
+<li>COUNT(*)统计null</li>
+<li>COUNT(字段)不统计null</li>
+<li>COUNT(1)可统计</li>
+</ul>
+<h1 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h1><table>
+<thead>
+<tr>
+<th>权限范围</th>
+<th>可用权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>表权限</td>
+<td><code>Select</code>, <code>Insert</code>, <code>Update</code>, <code>Delete</code>, <code>Create</code>, <code>Drop</code>, <code>Grant</code>, <code>References</code>, <code>Index</code>, <code>Alter</code></td>
+</tr>
+<tr>
+<td>列权限</td>
+<td><code>Select</code>, <code>Insert</code>, <code>Update</code>,<code>References</code></td>
+</tr>
+<tr>
+<td>过程权限</td>
+<td><code>Execute</code>, <code>Alter Routine</code>, <code>Grant</code></td>
+</tr>
+</tbody></table>
+<p>##授权</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span>  <span class="keyword">TO</span> jelly@<span class="string">&#x27;%&#x27;</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>给一个用户（jelly）分配全部的操作权限</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span>  <span class="keyword">TO</span> jelly@<span class="string">&#x27;%&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>%就是前面我们提到过的通配符，可以匹配0到n个字符。这里指的是该用户所登录的任何主机。</p>
+<p><strong>取消授权</strong><br>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">REVOKE</span> privilege <span class="keyword">ON</span> databasename.tablename <span class="keyword">FROM</span> <span class="string">&#x27;username&#x27;</span>@<span class="string">&#x27;host&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> test.user <span class="keyword">FROM</span> <span class="string">&#x27;jelly&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">FROM</span> <span class="string">&#x27;jelly&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>GRANT</strong>和<strong>REVOKE</strong>对于用户而言，一个是<strong>TO</strong>，一个是<strong>FROM</strong></p>
+</blockquote>
+<p><strong>查看授权</strong><br>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> GRANTS <span class="keyword">FOR</span> <span class="string">&#x27;jelly&#x27;</span>@<span class="string">&#x27;%&#x27;</span>; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>刷新权限</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>偶尔会出现，修改了操作系统表的权限，却没有及时更新的情况。可以用上述命令刷新。</p>
+<h2 id="日期时间函数"><a href="#日期时间函数" class="headerlink" title="日期时间函数"></a>日期时间函数</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NOW()</td>
+<td>当前日期和时间</td>
+</tr>
+<tr>
+<td>CURDATE()</td>
+<td>当前日期</td>
+</tr>
+<tr>
+<td>CURTIME()</td>
+<td>当前时间</td>
+</tr>
+<tr>
+<td>DATE_ADD()</td>
+<td>日期变化</td>
+</tr>
+<tr>
+<td>DATEDIFF()</td>
+<td>日期差值</td>
+</tr>
+<tr>
+<td>DATE_FORMATE()</td>
+<td>日期格式化</td>
+</tr>
+<tr>
+<td>###NOW&#x2F;CURDATE&#x2F;CURTIME</td>
+<td></td>
+</tr>
+<tr>
+<td>可以把NOW看作是CURDATE和CURTIME的综合</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>DATE_ADD</strong></p>
+<p>实现日志的增减，加为正数，减为负数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATE_ADD(CURDATE(),INTERVAL 3 WEEK);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>WEEK,也可以是DAY，YEAR<br>与之相对的还有一个DATE_SUB函数。<br>###DATEDIFF<br>获取两个日期之间的差值，左边减去右边，值为天数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATEDIFF(&#x27;2014-10-11&#x27;,&#x27;2014-09-06&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>DATE_FORMAT()</strong><br>日期格式化为其他形式，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATE_FORMAT(&#x27;2014-11-01&#x27;,&#x27;%m/%d/%Y&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果为：<br>11&#x2F;01&#x2F;2014<br>如果是小写的y，则格式化为11&#x2F;01&#x2F;14</p>
+<h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><p><strong>创建数据库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE &#123;DATABASE|SCHEMA&#125; [IF NOT EXISTS] db_name [DEFAULT] CHARCTER SET [=] charset_name;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意设置字符集的时候，utf-8要写作utf8。</p>
+</blockquote>
+<p><strong>修改数据库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER &#123;DATABASE|SCHEMA&#125; db_name [DEFAUTL] CHARCTER SET [=] charset_name;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>修改数据库编码格式</strong><br>    SET NAMES GBK;<br>GBK也可以是其他编码格式。但这只是修改你客户端显示的编码格式。服务端并不变化。<br><strong>修改配置文件来改服务端编码</strong><br>打开&#x2F;etc&#x2F;my.cnf文件<br>在[mysqld]条目下：增加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">character_set_server=utf8  </span><br><span class="line">init_connect=&#x27;SET NAMES utf8&#x27; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>有时在数据库创建完成后，编码格式是无法修改的。只能删掉重新建。<br>##删除数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP &#123;DATABASE|SCHEMA&#125; [IF EXISTS] db_name;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="数值运算"><a href="#数值运算" class="headerlink" title="数值运算"></a>数值运算</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CEIL()</td>
+<td>进一取整</td>
+</tr>
+<tr>
+<td>DIV</td>
+<td>整数除法</td>
+</tr>
+<tr>
+<td>FLOOR()</td>
+<td>舍一取整</td>
+</tr>
+<tr>
+<td>MOD</td>
+<td>模运算</td>
+</tr>
+<tr>
+<td>POWER()</td>
+<td>幂运算</td>
+</tr>
+<tr>
+<td>ROUND()</td>
+<td>四舍五入</td>
+</tr>
+<tr>
+<td>TRUNCARE()</td>
+<td>数字截取</td>
+</tr>
+<tr>
+<td>CEIL&#x2F;FLOOR&#x2F;ROUND</td>
+<td>前两者为对应操作。一个向上取整，一个向下取整。第三个ROUND为四舍五入。</td>
+</tr>
+<tr>
+<td>DIV&#x2F;MOD</td>
+<td>两者并非函数，而是 <strong>运算符</strong>。</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT 5 DIV 2;</span><br><span class="line">SELECT 7 MOD 3;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>MOD与%等价，就是模运算，与别不同的是，MySQL中支持浮点数取模。</p>
+<p><strong>POWER</strong><br>幂运算</p>
+<p><strong>TRUNCARE</strong><br>所谓的数字截取，就是对数字逐位的截断。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT TRUNCATE(125.123, 1);</span><br><span class="line">SELECT TRUNCATE(125.123, 0);</span><br><span class="line">SELECT TRUNCATE(125.123, - 1);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运算的结果分别为：125.1、125.0,120</p>
+<h2 id="比较运算符与函数"><a href="#比较运算符与函数" class="headerlink" title="比较运算符与函数"></a>比较运算符与函数</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[NOT] BETWEEN…AND…</td>
+<td>[不]在范围内</td>
+</tr>
+<tr>
+<td>[NOT] IN()</td>
+<td>[不]在列出的值范围内</td>
+</tr>
+<tr>
+<td>IS [NOT] NULL</td>
+<td>[不]为空</td>
+</tr>
+</tbody></table>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引能提高查询效率，但是查询效率和修改效率一直是一个矛盾。</p>
+<p><strong>普通索引</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-- 单独创建，colname为列名</span><br><span class="line">CREATE INDEX indexname ON tablename(colname(length));</span><br><span class="line">-- 也可以在修改表的时候创建</span><br><span class="line">ALTER TABLE table_name ADD INDEX [index_name] (column_list)</span><br><span class="line">-- 创建表的时候指定</span><br><span class="line">CREATE TABLE mytable(</span><br><span class="line">	ID INT NOT NULL,</span><br><span class="line">    username VARCHAR(16) NOT NULL,</span><br><span class="line">    INDEX [indexname] (username(length)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>唯一索引</strong><br>索引列必须唯一，但可以为NULL，不能有多个NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-- 单独创建</span><br><span class="line">CREATE UNIQUE INDEX indexname ON tablename(colname(length));</span><br><span class="line">-- 也可以在修改表的时候创建</span><br><span class="line">ALTER TABLE table_name ADD UNIQUE [index_name] (column_list)</span><br><span class="line">-- 创建表的时候指定</span><br><span class="line">CREATE TABLE mytable(</span><br><span class="line">	ID INT NOT NULL,</span><br><span class="line">    username VARCHAR(16) NOT NULL,</span><br><span class="line">    UNIQUE INDEX [indexname] (username(length)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>主键索引</strong><br>就是之前所说过的主键。不能使用<code>CREATE</code>语句单独创建。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-- 可以在修改表的时候创建</span><br><span class="line">ALTER TABLE tablename ADD PRIMARY KEY (column_list);</span><br><span class="line">-- 在表级定义主键</span><br><span class="line">CREATE TABLE mytable(</span><br><span class="line">	ID INT NOT NULL,</span><br><span class="line">    username VARCHAR(16) NOT NULL,</span><br><span class="line">    PRIMARY KEY(ID)</span><br><span class="line">);</span><br><span class="line">-- 在列级定义主键</span><br><span class="line">CREATE TABLE mytable(</span><br><span class="line">	ID INT NOT NULL PRIMARY KEY,</span><br><span class="line">    username VARCHAR(16) NOT NULL</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>由上可知，有两种主键定义方法。但是两者不尽相同。在列级定义主键<strong>这样是无法指定多个字段做主键的</strong>，这中情况下只能在表级定义主键</p>
+<p><strong>索引组织表</strong><br>InnoDB引擎中，表都是根据主键顺序组织存放的。称之为<code>索引组织表</code>。<br>在没有显示地声明主键的情况下，InnoDB按照如下方式选择或创建主键：</p>
+<ul>
+<li>如果存在<code>非空</code>的<code>唯一约束</code>，则将该列视为主键</li>
+<li>如果不存在，则自动创建一个6字节大小的指针</li>
+</ul>
+<p>如果表中有多个非空的唯一索引，那么InnoDB选择第一个定义的非空索引。这里依据的顺序是索引定义的顺序，而不是建表时列的顺序。<br>###_rowid<br>在主键为单个列的时候，我们可以使用_rowid来查看主键的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-- 比如：</span><br><span class="line">SELECT *,_rowid FROM test;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>全文索引</strong><br>只有InnodB引擎支持</p>
+<h2 id="信息函数"><a href="#信息函数" class="headerlink" title="信息函数"></a>信息函数</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONNECTIOIN_ID</td>
+<td>连接ID</td>
+</tr>
+<tr>
+<td>DATABASE</td>
+<td>当前数据库</td>
+</tr>
+<tr>
+<td>LAST_INSERT_ID</td>
+<td>最后插入记录ID</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>当前用户</td>
+</tr>
+<tr>
+<td>VERSION</td>
+<td>版本信息</td>
+</tr>
+<tr>
+<td>CONNECTION_ID</td>
+<td>第一连接就是1，以此类推。</td>
+</tr>
+<tr>
+<td>DATABASE</td>
+<td></td>
+</tr>
+<tr>
+<td>LAST_INSERT_ID</td>
+<td>当一条语句插入多条记录的时候，它只返回第一条记录的ID。</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>返回当前用户。MYSQL中的用户的完整用户名是 <strong>用户名@登录主机</strong></td>
+</tr>
+<tr>
+<td>VERSION</td>
+<td>MySQL版本号</td>
+</tr>
+</tbody></table>
+<h1 id="修改数据表"><a href="#修改数据表" class="headerlink" title="修改数据表"></a>修改数据表</h1><p>所有的数据表的修改SQL语句的开头都是ALTER TABLE+表名称。<br>##给表改名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name RENAME &#123;<span class="keyword">TO</span><span class="operator">|</span><span class="keyword">AS</span>&#125; tb_new_name;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>另外有个写法是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RENAME <span class="keyword">TABLE</span> tb_name <span class="keyword">TO</span> tb_new_name; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这句可以批量修改多个表的名称。</p>
+<blockquote>
+<p>尽量不要随意修改表的名称。对视图有影响。</p>
+</blockquote>
+<p><strong>添加&#x2F;删除列</strong><br><strong>插入列</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] col_name column_definition [<span class="keyword">FIRST</span><span class="operator">|</span>AFTER col_name];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>默认会插入到表的最下面，指定FIRST，则置于最上面，或者用<code>AFTER col_name</code> 指定为<code>col_name</code>的下面。 </p>
+<p><strong>删除列</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">DROP</span> col_name,DROP.....; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以一次性删除多个列。</p>
+<p><strong>修改列</strong><br><strong>修改列定义</strong><br>即修改列的属性。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name MODIFY col_name column_definition [<span class="keyword">FIRST</span><span class="operator">|</span>AFTER col_name];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test <span class="keyword">ADD</span> id <span class="type">SMALLINT</span> unsigned KEY auto_increment <span class="keyword">first</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>key可以表示主键，无需primary。fitrst表示插入的位置。</p>
+<blockquote>
+<p>如果要修改的列已经是<code>主键</code>了，则修改列定义的时候再加上<code>主键</code>字段会报错。</p>
+</blockquote>
+<p><strong>修改列名</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name CHANGE col_name col_new_name column_definition [<span class="keyword">FIRST</span><span class="operator">|</span>AFTER col_name];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>修改列名时，新列名后面要指明数据类型。</p>
+<p><strong>修改列顺序</strong><br>其实同上，具体比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `<span class="keyword">user</span>` CHANGE `join_time` `join_time` <span class="type">DATE</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> AFTER `role`;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>把join_time列放到role列后面。</p>
+<p><strong>修改约束</strong></p>
+<p><strong>PRIMARY KEY</strong><br>添加主键约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">ADD</span> [CONSTRAIN[symbol]] <span class="keyword">PRIMARY</span> KEY [index.type] (index_col_name,.....);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>删除主键约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">DROP</span> [index.type] <span class="keyword">PRIMARY</span> KEY;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>不需要指定列名，因为每个表只有一个主键。<br>注意！只有一个主键并不意味着主键只有一列。</p>
+<p><strong>UNIQUE</strong><br>添加唯一约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">ADD</span> [index.type] <span class="keyword">unique</span>(col_name);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>删除唯一约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">DROP</span> [index.type] <span class="keyword">unique</span>(col_name);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>###DEFAULT</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">ALTER</span> [<span class="keyword">COLUMN</span>] col_name &#123;<span class="keyword">SET</span> <span class="keyword">DEFAULT</span> literal<span class="operator">|</span><span class="keyword">DROP</span> <span class="keyword">DEFAULT</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> example:</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> users <span class="keyword">ALTER</span> age <span class="keyword">SET</span> <span class="keyword">DEFAULT</span> <span class="number">20</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>FOREIGN KEY</strong><br>添加外键约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">ADD</span> [CONSTRAIN[symbol]] <span class="keyword">FOREIGN</span> KEY [index_name](index_col_name,...)reference_definition;</span><br><span class="line"><span class="keyword">for</span> example:</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> users <span class="keyword">add</span> <span class="keyword">FOREIGN</span> KEY (pid) REFERENCE provinces (id);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>删除外键约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_name <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY fk_symbol;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><blockquote>
+<p>本文所有操作，均可<strong>通过普通SQL语句更新系统表user</strong>来实现相应的功能。</p>
+</blockquote>
+<p><strong>新建用户</strong><br>基本格式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;username&#x27;</span>@<span class="string">&#x27;host&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意引号的位置，不要用一对引号把@也包含进来。@前面是用户名，后面是主机名，可以使用通配符<code>%</code></p>
+<blockquote>
+<p>实际上可以省略用户名和主机名处的引号，但如果使用了通配符则引号不能省略</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;jelly&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> jelly<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> jelly;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>删除用户</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">USER</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">USER</span> jelly@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">USER</span> jelly<span class="variable">@localhost</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>##重命名用户<br>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RENAME <span class="keyword">USER</span> <span class="string">&#x27;jelly&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="keyword">TO</span> <span class="string">&#x27;guodong&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>修改密码</strong><br>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="operator">=</span> PASSWORD(<span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此外还可以使用mysql工具<code>mysqladmin</code>来修改</p>
+<blockquote>
+<p>格式：<code>mysqladmin -u用户名 -p旧密码 password 新密码</code></p>
+</blockquote>
+</blockquote>
+<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><p><strong>分类</strong><br>根据列的数目分为：</p>
+<ul>
+<li>列级约束<ul>
+<li>对一个数据列建立的约束，称为列级约束</li>
+<li>NOT NULL和DEFAULT只有列级约束</li>
+<li>其他三个有表级约束</li>
+</ul>
+</li>
+<li>表级约束<ul>
+<li>对多个数据列建立的约束，称为表级约束</li>
+</ul>
+</li>
+</ul>
+<p>列级约束可以在列定义时声明，也可以在列定义后声明。<br>表级约束只能在列定义后声明。    </p>
+<p>根据功能分为：</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NOT NULL</td>
+<td>非空约束</td>
+</tr>
+<tr>
+<td>PRIMARY KEY</td>
+<td>主键约束</td>
+</tr>
+<tr>
+<td>UNIQUE</td>
+<td>唯一约束</td>
+</tr>
+<tr>
+<td>DEFAULT</td>
+<td>默认约束</td>
+</tr>
+<tr>
+<td>FOREGIN KEY</td>
+<td>外键约束</td>
+</tr>
+<tr>
+<td>###注意</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>父表和子表具有相同的存储引擎（–InnoDB–）</li>
+<li>外键列和参照列必须具有相似的数据类型<ul>
+<li>其中数字的长度或是否有符号必须相同</li>
+<li>字符的长度可以不同</li>
+</ul>
+</li>
+<li>外键列和参照列必须创建 <em>索引</em>，如果外键列不存在索引，MySQL会自动帮其创建，但是不会自动帮参照列创建</li>
+</ul>
+<blockquote>
+<p>父表：具有参照列的是父表，比如省份与人中的省份。<br>子表：具有外键列的是子表，比如人</p>
+</blockquote>
+<p><strong>外键约束的参照操作</strong></p>
+<ul>
+<li>CASEADE &#x2F;&#x2F;更新（删除）父表（中的行），子表也随之更新</li>
+<li>SET NULL</li>
+<li>RESTRICT</li>
+<li>NO ACTION &#x2F;&#x2F;标准的SQL关键字，功能与MySQL中的RESTRICT相同。</li>
+</ul>
+<h1 id="字符（串）函数"><a href="#字符（串）函数" class="headerlink" title="字符（串）函数"></a>字符（串）函数</h1><p>函数可以在MySQL提示符中，直接用SELECT语句测试。<br>比如 <strong>SELECT USER();</strong><br><strong>分类</strong></p>
+<ul>
+<li>字符函数</li>
+<li>数值运算符与函数</li>
+<li>比较运算符与函数</li>
+<li>日期时间函数</li>
+<li>信息函数</li>
+<li>聚合函数</li>
+<li>加密函数</li>
+</ul>
+<p><strong>字符（串）函数</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONCAT</td>
+<td>字符串连接</td>
+</tr>
+<tr>
+<td>CONCAT_WS</td>
+<td>同上，但指定连接符</td>
+</tr>
+<tr>
+<td>FORMAT</td>
+<td>数字格式化</td>
+</tr>
+<tr>
+<td>LOWER</td>
+<td>转换成小写字母</td>
+</tr>
+<tr>
+<td>UPPER</td>
+<td>转换成大写字母</td>
+</tr>
+<tr>
+<td>LEFT</td>
+<td>获取左侧字符</td>
+</tr>
+<tr>
+<td>RIGHT</td>
+<td>获取右侧字符</td>
+</tr>
+<tr>
+<td>LENGTH</td>
+<td>获取长度</td>
+</tr>
+<tr>
+<td>LTRIM</td>
+<td>删除前导空格</td>
+</tr>
+<tr>
+<td>RTRIM</td>
+<td>删除后续空格</td>
+</tr>
+<tr>
+<td>TRIM</td>
+<td>删除前后空格</td>
+</tr>
+<tr>
+<td>SUBSTRING</td>
+<td>字符串截取</td>
+</tr>
+<tr>
+<td>[NOT] LIKE</td>
+<td>模式匹配</td>
+</tr>
+<tr>
+<td>REPEAT</td>
+<td>重复字符串</td>
+</tr>
+<tr>
+<td>REPLACE</td>
+<td>字符串替换</td>
+</tr>
+</tbody></table>
+<p><strong>CONCAT</strong><br>参数个数不限，连接成一个字符串<br>已知test表的内如如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+----+------------+-----------+</span><br><span class="line">| id | first_name | last_name |</span><br><span class="line">+----+------------+-----------+</span><br><span class="line">|  1 | A          | B         |</span><br><span class="line">|  2 | C          | D         |</span><br><span class="line">|  3 | tom%       | 123       |</span><br><span class="line">|  4 | NULL       | 11        |</span><br><span class="line">|  5 | 11         | 22        |</span><br><span class="line">|  6 | AA         | BB        |</span><br><span class="line">|  7 | CC         | DD        |</span><br><span class="line">+----+------------+-----------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>test表中有两个字段first_name,和last_name，调用连接函数之后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONCAT(first_name,last_name)AS full_name FROM test;</span><br><span class="line"></span><br><span class="line">+-----------+</span><br><span class="line">| full_name |</span><br><span class="line">+-----------+</span><br><span class="line">| AB        |</span><br><span class="line">| CD        |</span><br><span class="line">| tom%123   |</span><br><span class="line">| NULL      |</span><br><span class="line">| 1122      |</span><br><span class="line">| AABB      |</span><br><span class="line">| CCDD      |</span><br><span class="line">+-----------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>CONCAT_WS</strong><br>参数至少有三个，第一参数为要连接字符串的分隔符，后面的都是待连接的字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONCAT_WS(&#x27;-&#x27;,1992,10,17);</span><br><span class="line"></span><br><span class="line">+---------------------------+</span><br><span class="line">| CONCAT_WS(&#x27;-&#x27;,1992,10,17) |</span><br><span class="line">+---------------------------+</span><br><span class="line">| 1992-10-17                |</span><br><span class="line">+---------------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>FORMAT</strong><br>将数字格式化为字符串。第二个参数为小数的位数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT FORMAT(12345.67,2);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果为千分位:    </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+--------------------+</span><br><span class="line">| FORMAT(12345.67,2) |</span><br><span class="line">+--------------------+</span><br><span class="line">| 12,345.67          |</span><br><span class="line">+--------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>LOWER&#x2F;UPPER</strong><br>顾名思义，不再解释</p>
+<p><strong>LEFT&#x2F;RIGHT</strong><br>获取左（右）侧第几个字符。</p>
+<pre><code>SELECT LEFT(&#39;MySQL&#39;,2);
+</code></pre>
+<p><strong>LENGTH</strong><br>获取字符串长度。SQL Server中是len函数。MySQL中没有len函数。</p>
+<p><strong>LTRIM&#x2F;RTRIM</strong><br>删除前导&#x2F;后续空格</p>
+<p><strong>SUBSTRING</strong><br>与其他语言中一样，截取子串的三个参数分别为：</p>
+<ul>
+<li>原字符串</li>
+<li>起始位置（注意下标从1算起；可以为负数，即从右数起）</li>
+<li>截取长度（缺省为截取到结尾）</li>
+</ul>
+<p><strong>[NOT] LIKE</strong><br>    SELECT FROM ‘MySQL’ LIKE ‘M%’;</p>
+<p>结果为1，即true。  </p>
+<ul>
+<li>%代表0个或多个字符。</li>
+<li>_代表任意一个字符。</li>
+</ul>
+<blockquote>
+<p>关于转义<br>当要匹配的字符中含有特殊字符(比如%)时，需要转义。\，貌似\也可以<br>SELECT CONCAT(first_name,last_name)AS full_name FROM test WHERE first_name LIKE’%%‘;</p>
+</blockquote>
+<p>也可以自己指定<br>    SELECT CONCAT(first_name,last_name)AS full_name FROM test WHERE first_name LIKE’%1%’ ESCAPE ‘1’;</p>
+<p><strong>TRIM</strong><br>缺省可以删除前后空格，也可以删除指定的字符。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- 删除??MySQL???前面的？</span><br><span class="line">SELECT TRIM(LEADING &#x27;?&#x27; FROM &#x27;??MySQL???&#x27;);</span><br><span class="line">-- 删除后面的？</span><br><span class="line">SELECT TRIM(TRAILING &#x27;?&#x27; FROM &#x27;??MySQL???&#x27;);</span><br><span class="line">-- 删除前后的？</span><br><span class="line">SELECT TRIM(BOTH &#x27;?&#x27; FROM &#x27;??MySQL???&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>REPEAT</strong><br>重复某一字符串多少次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT REPEAT(&#x27;ab&#x27;,2);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> 结果是：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+----------------+</span><br><span class="line">| REPEAT(&#x27;ab&#x27;,2) |</span><br><span class="line">+----------------+</span><br><span class="line">| abab           |</span><br><span class="line">+----------------+</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>REPLACE</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-- 去掉所有的？</span><br><span class="line">SELECT REPLACE(&#x27;??MySQL&#x27;,&#x27;?&#x27;,&#x27;&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意！替换的时候也可以一换多，多换一。</p>
+<h1 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h1><p>UDF(User-defined function)<br><strong>创建自定义函数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUCNTION function_name</span><br><span class="line">RETURNS</span><br><span class="line">&#123;STRING|INTEGER|REAL|DECIMAL&#125;</span><br><span class="line">RETURN</span><br><span class="line">routine_body</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>函数体</strong><br>上面的routine_body指代函数体。其构成：  </p>
+<ul>
+<li>函数体由合法的SQL语句构成</li>
+<li>函数体可以是简单的SELECT或INSERT语句</li>
+<li>函数体如果为符合结构则使用BEGIN…END语句</li>
+<li>符合结构可以包含声明，循环，控制结构</li>
+</ul>
+<p><strong>举例</strong><br><code>来源慕课网</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 无参数</span><br><span class="line">CREATE function f() </span><br><span class="line">RETURNS VARCHAR(30) </span><br><span class="line">  RETURN Date_format(Now(), &#x27;%Y年%m月%d日 %H点：%i分：%s秒&#x27;); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 带参数</span><br><span class="line">CREATE function f2(num1 SMALLINT UNSIGNED, </span><br><span class="line">                   num2 SMALLINT UNSIGNED) </span><br><span class="line">RETURNS FLOAT(10, 2) UNSIGNED </span><br><span class="line">  RETURN ( num1 + num2 ) / 2; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">--  复合结构的函数体</span><br><span class="line">DELIMITER //</span><br><span class="line">CREATE function </span><br><span class="line">  adduser(username VARCHAR(20)) returns INT UNSIGNED </span><br><span class="line">BEGIN</span><br><span class="line">  INSERT test </span><br><span class="line">         ( </span><br><span class="line">                username </span><br><span class="line">         ) </span><br><span class="line">         VALUES </span><br><span class="line">         ( </span><br><span class="line">                username </span><br><span class="line">         ); </span><br><span class="line">   </span><br><span class="line">  RETURN Last_insert_id(); </span><br><span class="line">END//</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三个要点：</p>
+<ul>
+<li>首先因为函数体内有分号，所以我们要修改定界符，避免函数中途停止。使用DELIMITER指定新的定界符为&#x2F;&#x2F;。</li>
+<li>然后，因为函数体内有多条SQL语句，所以我们要用BEGIN…END包裹。</li>
+<li>RETURN在BEGIN…END结构内部。并且必须有RETURN。默认情况下，RETURN后面的语句会在屏幕上打印出来。</li>
+</ul>
+<p><strong>删除函数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP FUCNTION [IF EXISTS] function_name;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一次只能删除一个函数。</p>
+<h1 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h1><p>子查询（Subquery）是指嵌套在查询内部，且必须始终出现在圆括号内。</p>
+<blockquote>
+<p>外面的查询并非只是指的查找。</p>
+</blockquote>
+<p><strong>可以包含的关键字或条件</strong><br>    DISTINCT、GROUP BY、ORDER BY、LIMIT、函数等</p>
+<p><strong>外层的查询可以是</strong></p>
+<ul>
+<li>SELECT</li>
+<li>INSERT</li>
+<li>UPDATE</li>
+<li>SET</li>
+<li>DO</li>
+</ul>
+<p><strong>子查询分为三类</strong><br>使用比较运算符的子查询<br>    &#x3D;,&gt;,&lt;,&gt;&#x3D;,&lt;&#x3D;,&lt;&gt;,!&#x3D;,&lt;&#x3D;&gt;</p>
+<p><strong>语法结构</strong><br>    operand comparison_operator {ANY|SOME|ALL} (subquery)<br>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM av WHERE 身高&gt;=(SELECT AVG(身高) FROM av);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>字段名不加引号</p>
+<p><strong>修饰比较运算符</strong><br>使用ANY、SOME、ALL，ANY和SOME是等价的。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ANY</th>
+<th>ALL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;,&gt;&#x3D;</td>
+<td>最小值</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>&lt;,&lt;&#x3D;</td>
+<td>最大值</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>&#x3D;,&lt;&#x3D;&gt;</td>
+<td>任意值</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;&gt;,!&#x3D;</td>
+<td></td>
+<td>任意值</td>
+</tr>
+<tr>
+<td>比如：</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM av WHERE 胸围&gt;=ALL(SELECT 胸围 FROM av WHERE  身高&lt;160);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>使用[NOT]IN的子查询</strong><br><strong>语法结构</strong><br>    operand comparison_operator [NOT] IN (subquery)<br>&#x3D;ANY和IN等效<br>!&#x3D;ALL和NOT IN等效<br>###使用[NOT]EXISTS的子查询<br>如果子查询返回任何行，EXISTS将返回TRUE，否则返回FALSE。<br>该类子查询使用较少</p>
+<blockquote>
+<p>本部分内容来源与《从MySQL特性思考优化》这一网络文档</p>
+</blockquote>
+<h1 id="IN操作优化"><a href="#IN操作优化" class="headerlink" title="IN操作优化"></a>IN操作优化</h1><ul>
+<li>IN后面只能接常量，且最多不超过200个</li>
+<li>IN后面不能接子查询</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 <span class="keyword">where</span> tb1.id <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> tb2 <span class="keyword">where</span> tb2.c1...)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 优化后：</span><br><span class="line"><span class="keyword">select</span> tb1.<span class="operator">*</span> <span class="keyword">from</span> tb1, (<span class="keyword">select</span> id <span class="keyword">from</span> tb2 <span class="keyword">where</span> tb2.c1...)t <span class="keyword">where</span> tb1.id <span class="operator">=</span> t.id;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><p>如果是MyISAM的数据库引擎，那么直接复制相应的数据库文件即可。<br>如果是InnoDB则需要利用命令。这也是更为一般的普适方法。</p>
+<p>利用MySQL提供的工具———— <strong>mysqldump</strong></p>
+<p><strong>mysqldump</strong></p>
+<pre><code>mysqldump -uroot -p database_name [table_name1,...] &gt;pathname.sql
+</code></pre>
+<p><strong>备份数据库</strong><br>使用时需指定用户名，并使用-p选项，再回车后键入密码。实际上是利用的<a href="#%E9%87%8D%E5%AE%9A%E5%90%91">重定向</a>来生成一个sql脚本文件。<br>该文件中包含各个sql语句。  </p>
+<p>重定向符号后面的是sql文件的路径。Linux请使用<code>/</code>来表示目录结构。Windows可以用<code>\</code> 也可以用 <code>/</code>。<br>比如：<br><strong>Linux</strong></p>
+<pre><code>mysqldump -uroot -p world &gt;/home/jelly/config/world.sql
+</code></pre>
+<p><strong>Windows</strong></p>
+<pre><code>mysqldump -uroot -p world &gt;d:/config/world.sql
+mysqldump -uroot -p world &gt;d:\config\world.sql**
+</code></pre>
+<p><strong>备份部分表</strong><br>如果不想备份整个数据库，而是像备份某个表，那么在数据库后面指定表的名称。</p>
+<h1 id="还原"><a href="#还原" class="headerlink" title="还原"></a>还原</h1><p>执行已备份的sql脚本文件。有两种方案：</p>
+<p><strong>已连接数据库时</strong><br>登录mysql命令行，使用source命令（与mysqldump不同，source不是独立工具，而是MySQL内部命令）来执行sql脚本。<br>需要先创建一个数据库，然后切换到给数据库，再执行该命令。</p>
+<pre><code>mysql&gt; source d:/tool/world.sql
+</code></pre>
+<p><strong>未连接数据库时</strong><br>直接在shell的命令行执行：</p>
+<pre><code>mysql -uroot -p &lt; /home/jelly/config/world.sql
+</code></pre>
+<h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><p>存储引擎是基于表的，不是基于数据库的。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th align="center">MyISAM</th>
+<th align="center">InnoDB</th>
+<th align="center">Memory</th>
+<th align="center">Archive</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储限制</td>
+<td align="center">256T</td>
+<td align="center">64T</td>
+<td align="center">有</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td>事务安全</td>
+<td align="center">-</td>
+<td align="center">支持</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>索引支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>锁颗粒</td>
+<td align="center">表锁</td>
+<td align="center">行锁</td>
+<td align="center">表锁</td>
+<td align="center">行锁</td>
+</tr>
+<tr>
+<td>数据压缩</td>
+<td align="center">支持</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td>外键</td>
+<td align="center">-</td>
+<td align="center">支持</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+</tbody></table>
+<p>以上是常用引擎，另外还有其他存储引擎。</p>
+<h1 id="MYSQL命令"><a href="#MYSQL命令" class="headerlink" title="MYSQL命令"></a>MYSQL命令</h1><p><strong>登陆命令</strong><br>    mysql -u用户名 -p密码<br>用户名和-u选项之间可以有空格，但是密码和-p选项之间必须无空格。但是这样密码会是明文。你可以在键入-p之后，回车再输入密码，就是密文。<br>###常用选项</p>
+<table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>全写</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-h</td>
+<td>–host</td>
+<td>主机</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>–password</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>–port</td>
+<td>端口</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>–version</td>
+<td>版本信息</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>–user</td>
+<td>用户</td>
+</tr>
+<tr>
+<td></td>
+<td>–prompt</td>
+<td>修改提示符</td>
+</tr>
+</tbody></table>
+<p><strong>–prompt</strong><br>–prompt 支持几个转义词组</p>
+<ul>
+<li>\h 主机名</li>
+<li>\D 完整日期</li>
+<li>\d 当前数据库</li>
+<li>\u 当前用户</li>
+</ul>
+<p><strong>登陆之后</strong><br><strong>退出</strong></p>
+<ul>
+<li>exit</li>
+<li>quit</li>
+<li>\q</li>
+</ul>
+<p>都能退出mysql，系统显示Bye。<br>###帮助<br>键入<code>help</code>或<code>\h</code>。<br>###显示信息<br>select:</p>
+<ul>
+<li>version(); 版本信息</li>
+<li>now(); 当前时间</li>
+<li>user(); 用户@主机名</li>
+</ul>
+<p><strong>使用系统命令</strong><br><strong>!</strong> 后加shell命令可以在mysql中执行shell命令。</p>
+<blockquote>
+<p>gdb使用shell加命令来执行shell命令。</p>
+</blockquote>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
